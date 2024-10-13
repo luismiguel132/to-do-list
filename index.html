@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="to-do__titulo">Lista de Tarefas</h1>
+            <form id="tarefaFormulario" class="form-inline justify-content-center">
+                <input type="text" id="inputTarefa" class="form-control mb-2 mr-sm-2" placeholder="Nova Tarefa">
+                <button type="submit" class="btn btn-primary mb-2">Adicionar Tarefa</button>
+            </form>
+            <div id="filtrosTarefas" class="mt-3">
+                <button id="filtroTodas" class="btn btn-secondary">Todas</button>
+                <button id="filtroConcluidas" class="btn btn-secondary">Concluídas</button>
+                <button id="filtroPendentes" class="btn btn-secondary">Pendentes</button>
+            </div>
+            <ul id="listaTarefas" class="list-group"></ul>
+            <div id="statusTarefas" class="mt-3"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

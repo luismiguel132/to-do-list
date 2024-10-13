@@ -1,0 +1,12 @@
+.task-completed {
+    text-decoration: line-through;
+
+}
+body {
+    background-color: rgb(37, 37, 37);
+    color: rgb(0, 0, 0);
+}
+ul{
+    list-style: none;
+
+}
