@@ -56,20 +56,34 @@ function atualizarListaTarefas(){
 
     itemTarefa.appendChild(textoTarefa)
 
+    const botoesLi = document.createElement('div')
+    itemTarefa.appendChild(botoesLi)
+    botoesLi.className = 'div-botoesLi' 
+
+      
     const botaoExcluir = document.createElement('button');
-    botaoExcluir.textContent = 'Excluir';
+    botaoExcluir.className = 'btn btn-secondary buttomsLi';
     botaoExcluir.onclick = function() {
       removerTarefa(index);
     };
 
     const botaoEditar = document.createElement('button');
-    botaoEditar.textContent = 'Editar';
+    botaoEditar.className = 'btn btn-secondary  buttomsLi';
     botaoEditar.onclick = function() {
       editarTarefa(index);
     };
 
-    itemTarefa.appendChild(botaoExcluir);
-    itemTarefa.appendChild(botaoEditar);
+    const iconEditar = document.createElement('i');
+    iconEditar.className = 'bi bi-pencil-fill';
+
+    const iconExcluir = document.createElement('i');
+    iconExcluir.className = 'bi bi-x iconExcluir';
+
+    botoesLi.appendChild(botaoExcluir);
+    botoesLi.appendChild(botaoEditar);
+    botaoEditar.appendChild(iconEditar);
+    botaoExcluir.appendChild(iconExcluir);
+
     
     console.log("TarefasConcluídas", (tarefas.filter(tarefa => tarefa.concluida === true)))
     listaTarefas.appendChild(itemTarefa)

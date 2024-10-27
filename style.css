@@ -1,12 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
 .task-completed {
     text-decoration: line-through;
-
 }
+
 body {
-    background-color: rgb(37, 37, 37);
+    background: url(bacground1.jpg );
     color: rgb(0, 0, 0);
 }
 ul{
     list-style: none;
 
 }
+
+.to-do__titulo {
+    color: gray;
+}
+
+.iconExcluir {
+    font-size: 25px;
+}
+
+
+.buttomsLi {
+    line-height: 10px;
+    width: 48px;
+    height: 48px;
+
+}
+
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.div-botoesLi{
+    display: flex;
+    gap: 10px;
+}
+
+.container {
+    max-width: 540px;
+    filter: blur(0.5px);
+    backdrop-filter: blur(4.7px);
+    border-radius: 40px;
+    padding: 20px;
+    margin-top: 20px;
+    overflow-y: scroll;
+    max-height: 95vh;
+}
+
+.form-inline {
+    width: 100%;
+}
+.form-inline input{
+    width: 80%!important;
+}
+
+.form-inline button{
+    width: 15%;
+}
+
+.buttomFilter{
+    width: 32%;
+    margin-bottom: 10px;
+}
+
+design
