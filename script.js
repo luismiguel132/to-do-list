@@ -47,6 +47,7 @@ function atualizarListaTarefas(){
 
     const textoTarefa = document.createElement('span')
     textoTarefa.textContent = tarefa.texto
+    textoTarefa.className = 'texto-tarefa';
 
     textoTarefa.addEventListener('click', function(){
       tarefas[index].concluida = !tarefas[index].concluida;

@@ -8,17 +8,16 @@
     text-decoration: line-through;
 }
 
-body {
-    background: url(bacground1.jpg );
+.body {
     color: rgb(0, 0, 0);
 }
-ul{
+.ul{
     list-style: none;
 
 }
 
 .to-do__titulo {
-    color: gray;
+    color: rgb(128, 128, 128);
 }
 
 .iconExcluir {
@@ -30,13 +29,38 @@ ul{
     line-height: 10px;
     width: 48px;
     height: 48px;
+    transition: 0.2s ease-in-out;
+}
 
+.buttomsLi:hover {
+    background-color: rgba(128, 128, 128, 0.6);
+    scale: 1.1;
+}
+
+.texto-tarefa{
+    font-size: 18px;
+    margin-bottom: 5px;
+    cursor: default;
 }
 
 .list-group-item{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: 0.2s ease-in-out;
+
+
+}
+
+#listaTarefas {
+    display: flex;
+    flex-direction: column; /* Organização vertical */
+    gap: 10px;              /* Espaço entre os itens */
+    border-radius: 10px;
+}
+
+.list-group-item:hover {
+    transform: scale(1.03);
 }
 
 .div-botoesLi{
@@ -56,11 +80,30 @@ ul{
 }
 
 .form-inline {
-    width: 100%;
+    display: flex;
+    gap: 5px;
 }
-.form-inline input{
-    width: 80%!important;
+
+.form-inline input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
+
+.form-inline button {
+    flex-shrink: 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-inline button:hover {
+    background-color: #0056b3;
+}
+
 
 .form-inline button{
     width: 15%;
@@ -71,3 +114,60 @@ ul{
     margin-bottom: 10px;
 }
 
+.backgrounds{
+    display: flex;
+    border-radius: 40px;
+    padding: 20px;
+    margin-top: 20px;
+    justify-content: space-between;
+
+}
+
+.backgroundsRadio {
+    color: #fff;
+}
+
+.background-buttom {
+    border-radius: 10px;
+    margin-right: 10px;
+    background-color: gray ;
+    color: white;
+    height: 50px;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.list-group-item:not(.task-completed) {
+    color: black;
+}
+
+/* Estilo geral da barra de rolagem */
+::-webkit-scrollbar {
+    width: 8px; /* Largura da barra vertical */
+    height: 8px; /* Altura da barra horizontal */
+}
+
+/* Fundo da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do fundo da barra */
+    border-radius: 10px; /* Cantos arredondados */
+}
+
+/* Parte móvel da barra (thumb) */
+/* Parte móvel da barra (thumb) */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #1717179f, #1f1f1f); /* Gradiente inicial */
+    border-radius: 10px;
+    transition: background 0.2s ease-in-out; /* Suavizar a transição do gradiente */
+}
+
+/* Cor ao passar o mouse sobre o thumb */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #171717, #000000); /* Gradiente ao hover */
+}
