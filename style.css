@@ -74,7 +74,7 @@
     backdrop-filter: blur(4.7px);
     border-radius: 40px;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 40px;
     overflow-y: scroll;
     max-height: 95vh;
 }
@@ -123,6 +123,10 @@
 
 }
 
+.background-Radio-check {
+    display: flex;
+    justify-content: space-between;
+}
 .backgroundsRadio {
     color: #fff;
 }
@@ -170,4 +174,29 @@
 /* Cor ao passar o mouse sobre o thumb */
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #171717, #000000); /* Gradiente ao hover */
+}
+
+
+.buttomFilter {
+    transition: all 0.3s ease;
+}
+
+.buttomFilter:hover {
+    transform: scale(1.05);
+}
+
+.change-background-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.change-background-content{
+    display: flex;
+    gap: 10px;
+}
+
+label {
+    margin-bottom: 0;
 }

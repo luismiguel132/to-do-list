@@ -5,10 +5,11 @@
 // [-]O usuário pode adicionar uma nova tarefa com um título e descrição.
 // [x]O usuário pode excluir tarefas.
 // [x]Editar Tarefas
-// [ ]Aplicar estilização no Excluir e Editar
+// [x]Aplicar estilização no Excluir e Editar
 // [x]O usuário pode filtrar tarefas por "Todas", "Concluídas" e "Pendentes".
 // [x]Filtrar Tarefas
 // [ ]cor de fundo das tarefas
+// [ ]verificar se a uma tarefa com mesmo nome e a excluir se sim 
 
 let tarefas = []
 let filtroAtual = 'todas'
@@ -27,9 +28,26 @@ function adicionarTarefa(textoTarefa){
       concluida: false
     }
 
+    if(tarefas.some(tarefa => formatarTarefa(tarefa.texto) === formatarTarefa(textoTarefa) )) {
+      exibirToast()
+      return
+    }
+
     tarefas.push(tarefa)
     salvarTarefas()
     atualizarListaTarefas()
+}
+
+function formatarTarefa(textoTarefa){
+  return textoTarefa
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9]/g, '')
+}
+
+function exibirToast(){
+    const toastElement = document.getElementById('toast-alert')
+    const toast = new bootstrap.Toast(toastElement)
+    toast.show()
 }
 
 function salvarTarefas(){
