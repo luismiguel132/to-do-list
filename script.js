@@ -8,8 +8,12 @@
 // [x]Aplicar estilização no Excluir e Editar
 // [x]O usuário pode filtrar tarefas por "Todas", "Concluídas" e "Pendentes".
 // [x]Filtrar Tarefas
-// [ ]cor de fundo das tarefas
-// [ ]verificar se a uma tarefa com mesmo nome e a excluir se sim 
+// [X]cor de fundo das tarefas
+// [X]verificar se a uma tarefa com mesmo nome e a excluir se sim 
+// [X] modo escuro e claro
+// [X] organizar menu hamburger
+// [ ] pesquisar tarefas
+// [ ] adicionar data de criação
 
 let tarefas = []
 let filtroAtual = 'todas'
