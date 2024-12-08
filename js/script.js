@@ -8,12 +8,28 @@
 // [x]Aplicar estilização no Excluir e Editar
 // [x]O usuário pode filtrar tarefas por "Todas", "Concluídas" e "Pendentes".
 // [x]Filtrar Tarefas
-// [X]cor de fundo das tarefas
-// [X]verificar se a uma tarefa com mesmo nome e a excluir se sim 
-// [X] modo escuro e claro
-// [X] organizar menu hamburger
-// [ ] pesquisar tarefas
-// [ ] adicionar data de criação
+// [X]Cor de fundo das tarefas
+// [X]Verificar se há uma tarefa com mesmo nome e a excluir se sim
+// [X]Modo escuro e claro
+// [X]Organizar menu hamburger
+// [ ]Pesquisar tarefas
+
+//ideias do chat gpt
+
+
+// [ ]Adicionar data de criação
+// [ ]Subtarefas
+// [ ]Prioridade das Tarefas (Baixa, Média, Alta)
+// [ ]Notificações de Vencimento
+// [ ]Tarefas Repetitivas (Diárias, Semanais, Mensais)
+// [ ]Classificação das Tarefas por Data ou Prioridade
+// [ ]Integração com Calendário (Google Calendar)
+// [ ]Comentários nas Tarefas
+// [ ]Exportar Tarefas (CSV ou PDF)
+// [ ]Arrastar e Soltar (Drag & Drop)
+// [ ]Histórico de Tarefas Concluídas
+// [ ]Gestão de Tarefas por Categoria (Ex: Trabalho, Casa, Estudos)
+// [ ]Histórico de Edição de Tarefas
 
 let tarefas = []
 let filtroAtual = 'todas'
@@ -58,10 +74,13 @@ function salvarTarefas(){
   localStorage.setItem('tarefas', JSON.stringify(tarefas))
 }
 
+const inputPesquisa = document.getElementById("Input__pesquisa")
+
 function atualizarListaTarefas(){
   const listaTarefas = document.getElementById('listaTarefas')
   listaTarefas.innerHTML = ''
-  const tarefasFiltradas = filtrarTarefas()
+  const tarefasFiltradas = filtrarTarefas().filter(tarefa => tarefa.texto.toLowerCase().includes(inputPesquisa.value.toLowerCase()))
+  
 
   tarefasFiltradas.forEach((tarefa, index) => {
     const itemTarefa = document.createElement('li')
@@ -133,6 +152,10 @@ function editarTarefa(index){
 function inicializarApp(){
   carregarTarefas()
 
+  inputPesquisa.addEventListener('input', function() {
+    atualizarListaTarefas()
+  })
+
   document.getElementById('tarefaFormulario').addEventListener('submit', function(event){
     event.preventDefault()
     const inputTarefa = document.getElementById('inputTarefa');
@@ -169,6 +192,7 @@ document.getElementById("filtroPendentes").addEventListener('click', function(){
   filtroAtual = 'pendentes'
   atualizarListaTarefas()
 })
+
 
 
 document.addEventListener('DOMContentLoaded', inicializarApp)

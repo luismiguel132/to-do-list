@@ -53,7 +53,8 @@
 [data-bs-theme="dark"] .form-control,
 [data-bs-theme="dark"] .backgrounds input,
 [data-bs-theme="dark"] .backgrounds input::placeholder,
-[data-bs-theme="dark"] .backgroundsRadio
+[data-bs-theme="dark"] .backgroundsRadio,
+[data-bs-theme="dark"] .input--pesquisa-icon
 {
     color: #fff;
 }
@@ -63,8 +64,6 @@
     justify-content: space-between;
     align-items: center;
     transition: 0.2s ease-in-out;
-
-
 }
 
 #listaTarefas {
@@ -189,7 +188,6 @@
 }
 
 /* Parte móvel da barra (thumb) */
-/* Parte móvel da barra (thumb) */
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, #1717179f, #1f1f1f); /* Gradiente inicial */
     border-radius: 10px;
@@ -224,4 +222,46 @@
 
 label {
     margin-bottom: 0;
+}
+
+
+/* Estilo input pesquisa */
+
+.input--pesquisa-container {
+    position: relative;
+    margin-left: 22%;
+}
+
+#Input__pesquisa{
+    padding-left: 30px;
+}
+
+.input--pesquisa-icon{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) ;
+    color: #000;
+}
+
+@media screen and (max-width: 1020px){
+    .input--pesquisa-container {
+        margin-left: 16%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .input--pesquisa-container {
+        display: none!important;
+    }
+}
+
+.input--pesquisa-container-hamburguer {
+    display: none!important;
+}
+
+@media screen and (max-width: 767px) {
+    .input--pesquisa-container-hamburguer {
+        display: block!important;
+    }
 }
