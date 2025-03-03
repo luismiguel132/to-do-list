@@ -31,9 +31,14 @@
 
 .buttomsLi {
     line-height: 10px;
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     transition: 0.2s ease-in-out;
+    border-radius: 8px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttomsLi:hover {
@@ -64,6 +69,9 @@
     justify-content: space-between;
     align-items: center;
     transition: 0.2s ease-in-out;
+    margin-bottom: 5px;
+    border-radius: 8px !important;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 #listaTarefas {
@@ -83,14 +91,49 @@
 }
 
 .container {
-    max-width: 540px;
+    max-width: 100%;
     filter: blur(0.5px);
     backdrop-filter: blur(4.7px);
-    border-radius: 40px;
+    border-radius: 20px;
     padding: 20px;
     margin-top: 40px;
-    overflow-y: scroll;
-    max-height: 95vh;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background: rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+[data-bs-theme="dark"] .card {
+    background: rgba(33, 37, 41, 0.9);
+}
+
+[data-bs-theme="dark"] .card-header {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.list-group {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 10px;
 }
 
 .form-inline {
@@ -123,9 +166,37 @@
     width: 15%;
 }
 
-.buttomFilter{
+.buttomFilter {
     width: 32%;
     margin-bottom: 10px;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.buttomFilter:hover {
+    background-color: #e9ecef;
+    transform: scale(1.05);
+}
+
+[data-bs-theme="dark"] .buttomFilter {
+    background-color: #343a40;
+    border-color: #495057;
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .buttomFilter:hover {
+    background-color: #495057;
+}
+
+.form-inline .input-group {
+    width: 100%;
+}
+
+.form-inline .btn-primary {
+    padding: 8px 15px;
 }
 
 .backgrounds{
@@ -199,15 +270,6 @@
     background: linear-gradient(45deg, #171717, #000000); /* Gradiente ao hover */
 }
 
-
-.buttomFilter {
-    transition: all 0.3s ease;
-}
-
-.buttomFilter:hover {
-    transform: scale(1.05);
-}
-
 .change-background-container{
     display: flex;
     justify-content: space-between;
@@ -263,5 +325,71 @@ label {
 @media screen and (max-width: 767px) {
     .input--pesquisa-container-hamburguer {
         display: block!important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .col-md-4 {
+        padding: 0 5px;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+}
+
+[data-bs-theme="dark"] .list-group-item {
+    background-color: rgba(33, 37, 41, 0.8);
+    border-color: #495057;
+}
+
+[data-bs-theme="dark"] .card-body {
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .texto-tarefa {
+    color: #fff;
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 5px;
+        margin-top: 20px;
+    }
+
+    .card {
+        margin-bottom: 10px;
+    }
+
+    .buttomFilter {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    .texto-tarefa {
+        font-size: 16px;
+    }
+
+    .buttomsLi {
+        width: 34px;
+        height: 34px;
+    }
+
+    .iconExcluir {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        padding: 30px;
+    }
+
+    .card {
+        margin: 10px;
     }
 }

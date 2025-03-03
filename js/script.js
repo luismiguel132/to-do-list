@@ -31,168 +31,174 @@
 // [ ]Gestão de Tarefas por Categoria (Ex: Trabalho, Casa, Estudos)
 // [ ]Histórico de Edição de Tarefas
 
-let tarefas = []
-let filtroAtual = 'todas'
-
-function carregarTarefas(){
-  const armazenamentoTarefas = localStorage.getItem('tarefas')
-  if(armazenamentoTarefas){
-    tarefas = JSON.parse(armazenamentoTarefas)
-  }
-  atualizarListaTarefas()
-}
-
-function adicionarTarefa(textoTarefa){
-    const tarefa = {
-      texto: textoTarefa,
-      concluida: false
+class ListaTarefas {
+    constructor(id) {
+        this.id = id;
+        this.tarefas = [];
+        this.filtroAtual = 'todas';
+        this.inicializar();
     }
 
-    if(tarefas.some(tarefa => formatarTarefa(tarefa.texto) === formatarTarefa(textoTarefa) )) {
-      exibirToast()
-      return
+    carregarTarefas() {
+        const armazenamentoTarefas = localStorage.getItem(`tarefas_${this.id}`);
+        if (armazenamentoTarefas) {
+            this.tarefas = JSON.parse(armazenamentoTarefas);
+        }
+        this.atualizarListaTarefas();
     }
 
-    tarefas.push(tarefa)
-    salvarTarefas()
-    atualizarListaTarefas()
-}
-
-function formatarTarefa(textoTarefa){
-  return textoTarefa
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]/g, '')
-}
-
-function exibirToast(){
-    const toastElement = document.getElementById('toast-alert')
-    const toast = new bootstrap.Toast(toastElement)
-    toast.show()
-}
-
-function salvarTarefas(){
-  localStorage.setItem('tarefas', JSON.stringify(tarefas))
-}
-
-const inputPesquisa = document.getElementById("Input__pesquisa")
-
-function atualizarListaTarefas(){
-  const listaTarefas = document.getElementById('listaTarefas')
-  listaTarefas.innerHTML = ''
-  const tarefasFiltradas = filtrarTarefas().filter(tarefa => tarefa.texto.toLowerCase().includes(inputPesquisa.value.toLowerCase()))
-  
-
-  tarefasFiltradas.forEach((tarefa, index) => {
-    const itemTarefa = document.createElement('li')
-    itemTarefa.className = tarefa.concluida ? 'list-group-item task-completed' : 'list-group-item';
-
-    const textoTarefa = document.createElement('span')
-    textoTarefa.textContent = tarefa.texto
-    textoTarefa.className = 'texto-tarefa';
-
-    textoTarefa.addEventListener('click', function(){
-      tarefas[index].concluida = !tarefas[index].concluida;
-      salvarTarefas()
-      atualizarListaTarefas()
-    })
-
-    itemTarefa.appendChild(textoTarefa)
-
-    const botoesLi = document.createElement('div')
-    itemTarefa.appendChild(botoesLi)
-    botoesLi.className = 'div-botoesLi' 
-
-      
-    const botaoExcluir = document.createElement('button');
-    botaoExcluir.className = 'btn btn-secondary buttomsLi';
-    botaoExcluir.onclick = function() {
-      removerTarefa(index);
-    };
-
-    const botaoEditar = document.createElement('button');
-    botaoEditar.className = 'btn btn-secondary  buttomsLi';
-    botaoEditar.onclick = function() {
-      editarTarefa(index);
-    };
-
-    const iconEditar = document.createElement('i');
-    iconEditar.className = 'bi bi-pencil-fill';
-
-    const iconExcluir = document.createElement('i');
-    iconExcluir.className = 'bi bi-x iconExcluir';
-
-    botoesLi.appendChild(botaoExcluir);
-    botoesLi.appendChild(botaoEditar);
-    botaoEditar.appendChild(iconEditar);
-    botaoExcluir.appendChild(iconExcluir);
-
-    
-    console.log("TarefasConcluídas", (tarefas.filter(tarefa => tarefa.concluida === true)))
-    listaTarefas.appendChild(itemTarefa)
-    
-  })
-}
-
-
-function removerTarefa(index){
-  tarefas.splice(index, 1)
-  salvarTarefas()
-  atualizarListaTarefas()
-}
-
-function editarTarefa(index){
-  var novoTexto = prompt("Edite a tarefa:", tarefas[index].texto)
-  if(novoTexto !== '' && novoTexto !== null){
-    tarefas[index].texto = novoTexto
-    salvarTarefas()
-    atualizarListaTarefas()
-  }
-}
-
-function inicializarApp(){
-  carregarTarefas()
-
-  inputPesquisa.addEventListener('input', function() {
-    atualizarListaTarefas()
-  })
-
-  document.getElementById('tarefaFormulario').addEventListener('submit', function(event){
-    event.preventDefault()
-    const inputTarefa = document.getElementById('inputTarefa');
-    const textoTarefa = inputTarefa.value
-
-    if(textoTarefa !== ''){
-      adicionarTarefa(textoTarefa);
-      inputTarefa.value = ''
+    salvarTarefas() {
+        localStorage.setItem(`tarefas_${this.id}`, JSON.stringify(this.tarefas));
     }
-  })
+
+    adicionarTarefa(textoTarefa) {
+        const tarefa = {
+            texto: textoTarefa,
+            concluida: false
+        };
+
+        if (this.tarefas.some(t => this.formatarTarefa(t.texto) === this.formatarTarefa(textoTarefa))) {
+            this.exibirToast();
+            return;
+        }
+
+        this.tarefas.push(tarefa);
+        this.salvarTarefas();
+        this.atualizarListaTarefas();
+    }
+
+    formatarTarefa(textoTarefa) {
+        return textoTarefa
+            .toLowerCase()
+            .replace(/[^a-zA-Z0-9]/g, '');
+    }
+
+    exibirToast() {
+        const toastElement = document.getElementById('toast-alert');
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+    }
+
+    removerTarefa(index) {
+        this.tarefas.splice(index, 1);
+        this.salvarTarefas();
+        this.atualizarListaTarefas();
+    }
+
+    editarTarefa(index) {
+        const novoTexto = prompt("Edite a tarefa:", this.tarefas[index].texto);
+        if (novoTexto !== '' && novoTexto !== null) {
+            this.tarefas[index].texto = novoTexto;
+            this.salvarTarefas();
+            this.atualizarListaTarefas();
+        }
+    }
+
+    filtrarTarefas() {
+        if (this.filtroAtual === 'concluidas') {
+            return this.tarefas.filter(tarefa => tarefa.concluida);
+        } else if (this.filtroAtual === 'pendentes') {
+            return this.tarefas.filter(tarefa => !tarefa.concluida);
+        }
+        return this.tarefas;
+    }
+
+    atualizarListaTarefas() {
+        const listaTarefas = document.getElementById(`listaTarefas${this.id}`);
+        const inputPesquisa = document.getElementById("Input__pesquisa");
+        listaTarefas.innerHTML = '';
+        
+        const tarefasFiltradas = this.filtrarTarefas()
+            .filter(tarefa => tarefa.texto.toLowerCase().includes(inputPesquisa?.value?.toLowerCase() || ''));
+
+        tarefasFiltradas.forEach((tarefa, index) => {
+            const itemTarefa = document.createElement('li');
+            itemTarefa.className = tarefa.concluida ? 'list-group-item task-completed' : 'list-group-item';
+
+            const textoTarefa = document.createElement('span');
+            textoTarefa.textContent = tarefa.texto;
+            textoTarefa.className = 'texto-tarefa';
+
+            textoTarefa.addEventListener('click', () => {
+                this.tarefas[index].concluida = !this.tarefas[index].concluida;
+                this.salvarTarefas();
+                this.atualizarListaTarefas();
+            });
+
+            itemTarefa.appendChild(textoTarefa);
+
+            const botoesLi = document.createElement('div');
+            botoesLi.className = 'div-botoesLi';
+
+            const botaoExcluir = document.createElement('button');
+            botaoExcluir.className = 'btn btn-secondary buttomsLi';
+            botaoExcluir.onclick = () => this.removerTarefa(index);
+
+            const botaoEditar = document.createElement('button');
+            botaoEditar.className = 'btn btn-secondary buttomsLi';
+            botaoEditar.onclick = () => this.editarTarefa(index);
+
+            const iconEditar = document.createElement('i');
+            iconEditar.className = 'bi bi-pencil-fill';
+
+            const iconExcluir = document.createElement('i');
+            iconExcluir.className = 'bi bi-x iconExcluir';
+
+            botoesLi.appendChild(botaoExcluir);
+            botoesLi.appendChild(botaoEditar);
+            botaoEditar.appendChild(iconEditar);
+            botaoExcluir.appendChild(iconExcluir);
+
+            itemTarefa.appendChild(botoesLi);
+            listaTarefas.appendChild(itemTarefa);
+        });
+    }
+
+    inicializar() {
+        this.carregarTarefas();
+
+        document.getElementById(`tarefaFormulario${this.id}`).addEventListener('submit', (event) => {
+            event.preventDefault();
+            const inputTarefa = document.getElementById(`inputTarefa${this.id}`);
+            const textoTarefa = inputTarefa.value;
+
+            if (textoTarefa !== '') {
+                this.adicionarTarefa(textoTarefa);
+                inputTarefa.value = '';
+            }
+        });
+
+        // Configurar filtros
+        document.getElementById(`filtroTodas${this.id}`).addEventListener('click', () => {
+            this.filtroAtual = 'todas';
+            this.atualizarListaTarefas();
+        });
+
+        document.getElementById(`filtroConcluidas${this.id}`).addEventListener('click', () => {
+            this.filtroAtual = 'concluidas';
+            this.atualizarListaTarefas();
+        });
+
+        document.getElementById(`filtroPendentes${this.id}`).addEventListener('click', () => {
+            this.filtroAtual = 'pendentes';
+            this.atualizarListaTarefas();
+        });
+    }
 }
 
+// Inicializar as três listas quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', () => {
+    const lista1 = new ListaTarefas('');  // Lista principal (mantém IDs originais para compatibilidade)
+    const lista2 = new ListaTarefas('2');
+    const lista3 = new ListaTarefas('3');
 
-function filtrarTarefas(){
-  if(filtroAtual === 'concluidas'){
-    return tarefas.filter(tarefa => tarefa.concluida)
-  } else if (filtroAtual === 'pendentes'){
-    return tarefas.filter(tarefa => !tarefa.concluida)
-  }
-  return tarefas
-}
-
-document.getElementById("filtroTodas").addEventListener('click', function(){
-  filtroAtual = 'todas'
-  atualizarListaTarefas()
-})
-
-document.getElementById("filtroConcluidas").addEventListener('click', function(){
-  filtroAtual = 'concluidas'
-  atualizarListaTarefas()
-})
-
-document.getElementById("filtroPendentes").addEventListener('click', function(){
-  filtroAtual = 'pendentes'
-  atualizarListaTarefas()
-})
-
-
-
-document.addEventListener('DOMContentLoaded', inicializarApp)
+    // Configurar pesquisa global
+    const inputPesquisa = document.getElementById("Input__pesquisa");
+    if (inputPesquisa) {
+        inputPesquisa.addEventListener('input', () => {
+            lista1.atualizarListaTarefas();
+            lista2.atualizarListaTarefas();
+            lista3.atualizarListaTarefas();
+        });
+    }
+});
