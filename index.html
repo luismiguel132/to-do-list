@@ -81,6 +81,14 @@
 
     <div class="container mt-5 pt-5">
         <div class="row">
+            <form id="novaListaFormulario" class="form-inline justify-content-center mb-4">
+                <div class="input-group">
+                    <input type="text" id="inputNovaLista" class="form-control" placeholder="Nome da Nova Lista">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i> Criar Lista</button>
+                </div>
+            </form>
+
+
             <!-- Bloco de Lista 1 -->
             <div class="col-md-4 mb-4">
                 <div class="card">
@@ -169,8 +177,19 @@
     
     <script src="/js/backgrouds.js"></script>
     <script src="/js/darkTheme.js"></script>
-    <script src="/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Inicialização do Sistema -->
+    <script src="/js/app.js"></script>
+
+    <!-- Manipulação do DOM (Ex: Criar Lista, Excluir Lista) -->
+    <script src="/js/domManipulation.js"></script>
+
+    <!-- Classe lista Tarefas -->
+    <script src="/js/listaTarefas.js"></script>
+
+    <!-- Lida com localStorage -->
+    <script src="/js/storage.js"></script>
 </body>
 </html>
 
