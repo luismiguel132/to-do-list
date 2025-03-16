@@ -14,7 +14,7 @@
 // [X]Organizar menu hamburger
 // [x]Pesquisar tarefas
 
-//  < IDEIAS DO CHAT GPT > \\
+//ideias do chat gpt
 
 // [ ]Adicionar data de criação
 // [ ]Subtarefas
