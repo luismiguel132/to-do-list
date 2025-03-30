@@ -1,8 +1,13 @@
+let todasAsListas = [];
+
+console.log('listaTarefas.js carregado', todasAsListas);
+
 class ListaTarefas {
     constructor(id) {
         this.id = id;
         this.tarefas = [];
         this.filtroAtual = 'todas';
+        todasAsListas.push(this);
         this.inicializar();
     }
 
@@ -21,7 +26,8 @@ class ListaTarefas {
     adicionarTarefa(textoTarefa) {
         const tarefa = {
             texto: textoTarefa,
-            concluida: false
+            concluida: false,
+            descricao: " "
         };
 
         if (this.tarefas.some(t => this.formatarTarefa(t.texto) === this.formatarTarefa(textoTarefa))) {
@@ -32,7 +38,7 @@ class ListaTarefas {
         this.tarefas.push(tarefa);
         this.salvarTarefas();
         this.atualizarListaTarefas();
-        
+        console.log(textoTarefa);
     }
 
     formatarTarefa(textoTarefa) {
@@ -79,7 +85,7 @@ class ListaTarefas {
         }
         const inputPesquisa = document.getElementById("Input__pesquisa");
         listaTarefas.innerHTML = '';
-        
+
         const tarefasFiltradas = this.filtrarTarefas()
             .filter(tarefa => tarefa.texto.toLowerCase().includes(inputPesquisa?.value?.toLowerCase() || ''));
 
@@ -127,33 +133,66 @@ class ListaTarefas {
     }
 
     inicializar() {
-        // Verificar se a lista existe antes de tentar carregar as tarefas
-        const listaTarefasEl = document.getElementById(`listaTarefas${this.id}`);
-        if (!listaTarefasEl) {
-            console.error(`Lista de tarefas com ID listaTarefas${this.id} não encontrada.`);
-            return;
-        }
-
         this.carregarTarefas();
 
-        // Verificar se o formulário existe antes de adicionar o event listener
-        const formulario = document.getElementById(`tarefaFormulario${this.id}`);
-        if (formulario) {
-            formulario.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const inputTarefa = document.getElementById(`inputTarefa${this.id}`);
-                const textoTarefa = inputTarefa.value;
+        // Configurar o botão de abrir modal para esta lista
+        const modalButtonAbrir = document.querySelector(`.abrir__modal[data-lista-id="${this.id}"]`);
+        const modalForm = document.getElementById('modalTarefaForm');
+        const overlay = document.querySelector('.overlay');
+        const modalTarefas = document.querySelector('.criar__tarefas');
+        const modalButtonFechar = document.querySelector('.fechar__modal');
+        const listaIdInput = document.getElementById('listaId');
 
-                if (textoTarefa !== '') {
-                    this.adicionarTarefa(textoTarefa);
-                    inputTarefa.value = '';
-                }
+        // Abrir modal e definir o ID da lista
+        if (modalButtonAbrir) {
+            modalButtonAbrir.addEventListener('click', () => {
+                overlay.style.display = 'block';
+                modalTarefas.style.display = 'flex';
+                listaIdInput.value = this.id; // Define o ID da lista no campo oculto
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                    modalTarefas.style.opacity = '1';
+                }, 10);
             });
-        } else {
-            console.error(`Formulário com ID tarefaFormulario${this.id} não encontrado.`);
         }
 
-        // Verificar se os botões de filtro existem antes de adicionar os event listeners
+        // Fechar modal
+        const fecharModal = () => {
+            overlay.style.opacity = '0';
+            modalTarefas.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                modalTarefas.style.display = 'none';
+            }, 500);
+        };
+
+        if (modalButtonFechar) {
+            modalButtonFechar.addEventListener('click', fecharModal);
+        }
+        if (overlay) {
+            overlay.addEventListener('click', fecharModal);
+        }
+
+        // Enviar tarefa via modal (configurado apenas uma vez no app.js, mas mantido aqui como fallback)
+        if (modalForm && !modalForm.dataset.listenerAdded) {
+            modalForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const inputTarefa = document.getElementById('inputTarefaModal');
+                const textoTarefa = inputTarefa.value.trim();
+                const listaId = listaIdInput.value;
+                if (textoTarefa && listaId !== undefined) {
+                    const lista = todasAsListas.find(l => l.id === listaId);
+                    if (lista) {
+                        lista.adicionarTarefa(textoTarefa);
+                        inputTarefa.value = '';
+                        fecharModal();
+                    }
+                }
+            });
+            modalForm.dataset.listenerAdded = 'true'; // Evita múltiplos listeners
+        }
+
+        // Configurar filtros
         const filtroTodas = document.getElementById(`filtroTodas${this.id}`);
         const filtroConcluidas = document.getElementById(`filtroConcluidas${this.id}`);
         const filtroPendentes = document.getElementById(`filtroPendentes${this.id}`);

@@ -41,17 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
         colunasPadrao[2].id = 'coluna-lista-padrao-3';
     }
 
-    const lista1 = new ListaTarefas('');  // Lista principal (mantém IDs originais para compatibilidade)
-    const lista2 = new ListaTarefas('2');
-    const lista3 = new ListaTarefas('3');
+    new ListaTarefas('');  // Lista principal (mantém IDs originais para compatibilidade)
+    new ListaTarefas('2');
+    new ListaTarefas('3');
 
     // Configurar pesquisa global **** funcionando em partes
     const inputPesquisa = document.getElementById("Input__pesquisa");
     if (inputPesquisa) {
         inputPesquisa.addEventListener('input', () => {
-            lista1.atualizarListaTarefas();
-            lista2.atualizarListaTarefas();
-            lista3.atualizarListaTarefas();
+            todasAsListas.forEach(lista => lista.atualizarListaTarefas());
+            console.log("todas as listas >>", todasAsListas);
         });
     }
 

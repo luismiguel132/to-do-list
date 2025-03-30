@@ -8,6 +8,14 @@
     font-family: "Poppins", sans-serif;
 }
 
+
+body{
+    background: url(/images/background1.jpg );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
 .task-completed {
     text-decoration: line-through;
 }
@@ -79,6 +87,9 @@
     margin-bottom: 5px;
     border-radius: 8px !important;
     background-color: rgba(255, 255, 255, 0.8);
+    width: fit-content;
+    min-width: 100%;
+    gap: 17px;
 }
 
 #listaTarefas {
@@ -90,6 +101,7 @@
 
 .list-group-item:hover {
     transform: scale(1.03);
+
 }
 
 .div-botoesLi{
