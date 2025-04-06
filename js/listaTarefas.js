@@ -23,11 +23,11 @@ class ListaTarefas {
         localStorage.setItem(`tarefas_${this.id}`, JSON.stringify(this.tarefas));
     }
 
-    adicionarTarefa(textoTarefa) {
+    adicionarTarefa(textoTarefa, descricaoTarefa = "") {
         const tarefa = {
             texto: textoTarefa,
             concluida: false,
-            descricao: " "
+            descricao: descricaoTarefa,
         };
 
         if (this.tarefas.some(t => this.formatarTarefa(t.texto) === this.formatarTarefa(textoTarefa))) {
@@ -92,10 +92,20 @@ class ListaTarefas {
         tarefasFiltradas.forEach((tarefa, index) => {
             const itemTarefa = document.createElement('li');
             itemTarefa.className = tarefa.concluida ? 'list-group-item task-completed' : 'list-group-item';
+            const conteudoTarefa = document.createElement('div');
+            conteudoTarefa.className = 'conteudo-tarefa';
+
 
             const textoTarefa = document.createElement('span');
             textoTarefa.textContent = tarefa.texto;
             textoTarefa.className = 'texto-tarefa';
+
+            
+            const descricaoTarefa = document.createElement('p');
+            descricaoTarefa.textContent = tarefa.descricao;
+            descricaoTarefa.className = 'descricao-tarefa';
+
+
 
             textoTarefa.addEventListener('click', () => {
                 this.tarefas[index].concluida = !this.tarefas[index].concluida;
@@ -103,8 +113,12 @@ class ListaTarefas {
                 this.atualizarListaTarefas();
             });
 
-            itemTarefa.appendChild(textoTarefa);
+            itemTarefa.appendChild(conteudoTarefa);
 
+            conteudoTarefa.appendChild(textoTarefa);
+
+            conteudoTarefa.appendChild(descricaoTarefa);
+            
             const botoesLi = document.createElement('div');
             botoesLi.className = 'div-botoesLi';
 
@@ -178,13 +192,16 @@ class ListaTarefas {
             modalForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const inputTarefa = document.getElementById('inputTarefaModal');
+                const descricaoTarefa = document.getElementById('descricaoTarefaModal'); 
                 const textoTarefa = inputTarefa.value.trim();
+                const descricao = descricaoTarefa.value.trim();
                 const listaId = listaIdInput.value;
                 if (textoTarefa && listaId !== undefined) {
                     const lista = todasAsListas.find(l => l.id === listaId);
                     if (lista) {
-                        lista.adicionarTarefa(textoTarefa);
+                        lista.adicionarTarefa(textoTarefa, descricao);
                         inputTarefa.value = '';
+                        descricaoTarefa.value = '';
                         fecharModal();
                     }
                 }

@@ -101,8 +101,12 @@ body{
 
 .list-group-item:hover {
     transform: scale(1.03);
-
 }
+
+.descricao-tarefa{
+    margin-bottom: 0px;
+}
+
 
 .div-botoesLi{
     display: flex;
@@ -267,6 +271,7 @@ body{
     background-color: #e9ecef;
     transform: scale(1.05);
 }
+
 
 [data-bs-theme="dark"] .buttomFilter {
     background-color: #343a40;

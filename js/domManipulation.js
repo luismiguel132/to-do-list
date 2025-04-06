@@ -12,11 +12,7 @@ function criarListaNoDom(id, nome) {
                 </button>
             </div>
             <div class="card-body">
-                <form id="tarefaFormulario${id}" class="form-inline justify-content-center">
-                    <div class="input-group mb-3">
-                        <input type="text" id="inputTarefa${id}" class="form-control" placeholder="Nova Tarefa">
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></button>
-                    </div>
+                <button class="abrir__modal" data-lista-id="${id}">Criar Tarefa</button>
                 </form>
                 <div id="filtrosTarefas${id}" class="mb-3">
                     <button id="filtroTodas${id}" class="btn btn-sm btn-secondary buttomFilter">Todas</button>

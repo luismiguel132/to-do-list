@@ -1,5 +1,5 @@
 .criar__tarefas {
-    position: absolute;
+    position: fixed ;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -15,6 +15,10 @@
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     z-index: 1050;
+}
+
+.titulo__input {
+    margin-bottom: 17px;
 }
 
 .title_modal {
@@ -76,3 +80,4 @@
     transform: scale(1.05);
     border: 1px solid #565e64;
 }
+
