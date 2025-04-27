@@ -14,7 +14,7 @@
     <div class="overlay"></div>
     <nav class="navbar bg-body-tertiary fixed-top">
         <div class="container-fluid">Lista de Tarefas</a>
-        <div class="d-flex input--pesquisa-container" role="search">
+        <div class="d-flex input--pesquisa-container desktop" role="search">
             <i class='bx bx-search-alt input--pesquisa-icon'></i>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="Input__pesquisa">
         </div>
@@ -25,45 +25,52 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
+        <!--Start Menu Hamburguer -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Lista de Tarefas</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                    <div class="backgrounds">
-                        <input type="text" id="backgroundInput" placeholder="Insira o URL do background">
-                        <button onclick="changeBackground()" class="background-buttom">Aplicar Background</button>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Trocar Background
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="dropdown-item" href="#">
-                                <div class="change-background-content">
-                                    <label for="background1" class="backgroundsRadio ">Backgroud 1 </label>
-                                    <input type="radio" name="background" id="background1" onclick="changeBackgroundRadio()" value="/images/background1.jpg" class="background-Radio-check">
+                <div class="d-flex input--pesquisa-container mobile" role="search">
+                    <i class='bx bx-search-alt input--pesquisa-icon'></i>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="Input__pesquisa_mobile">
+                </div>
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <div class="backgrounds">
+                            <input type="text" id="backgroundInput" placeholder="Insira o URL do background">
+                            <button onclick="changeBackground()" class="background-buttom">Aplicar Background</button>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Trocar Background
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="dropdown-item" href="#">
+                                    <div class="change-background-content">
+                                        <label for="background1" class="backgroundsRadio ">Backgroud 1 </label>
+                                        <input type="radio" name="background" id="background1" onclick="changeBackgroundRadio()" value="/images/background1.jpg" class="background-Radio-check">
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown-item" href="#">
-                                <div class="change-background-content">
-                                    <label for="background2" class="backgroundsRadio">Backgroud 2</label>
-                                    <input type="radio" name="background" id="background2" onclick="changeBackgroundRadio()" value="/images/background2.jpg" class="background-Radio-check">
+                            </li>
+                            <li>
+                                <div class="dropdown-item" href="#">
+                                    <div class="change-background-content">
+                                        <label for="background2" class="backgroundsRadio">Backgroud 2</label>
+                                        <input type="radio" name="background" id="background2" onclick="changeBackgroundRadio()" value="/images/background2.jpg" class="background-Radio-check">
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
+        <!--End Menu Hamburguer -->
         </div>
     </nav>
 

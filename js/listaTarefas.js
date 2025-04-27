@@ -83,11 +83,15 @@ class ListaTarefas {
             console.error(`Elemento com ID listaTarefas${this.id} não encontrado.`);
             return;
         }
-        const inputPesquisa = document.getElementById("Input__pesquisa");
+        const inputPesquisaDesktop = document.getElementById("Input__pesquisa");
+        const inputPesquisaMobile = document.getElementById("Input__pesquisa_mobile");
         listaTarefas.innerHTML = '';
 
+        const valorPesquisa = (inputPesquisaMobile?.value || inputPesquisaDesktop?.value || '').toLowerCase();
+    listaTarefas.innerHTML = '';
+
         const tarefasFiltradas = this.filtrarTarefas()
-            .filter(tarefa => tarefa.texto.toLowerCase().includes(inputPesquisa?.value?.toLowerCase() || ''));
+            .filter(tarefa => tarefa.texto.toLowerCase().includes(valorPesquisa));
 
         tarefasFiltradas.forEach((tarefa, index) => {
             const itemTarefa = document.createElement('li');

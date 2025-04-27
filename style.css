@@ -37,6 +37,8 @@ body{
 }
 
 
+
+
 .buttomsLi {
     line-height: 10px;
     width: 38px;
@@ -398,6 +400,14 @@ label {
     color: #000;
 }
 
+.desktop{
+    display: block;
+}
+
+.mobile{
+    display: none!important;
+}
+
 @media screen and (max-width: 1020px){
     .input--pesquisa-container {
         margin-left: 16%;
@@ -405,13 +415,21 @@ label {
 }
 
 @media screen and (max-width: 768px){
-    .input--pesquisa-container {
+    .desktop{
         display: none!important;
+    }
+    .mobile{
+        display: block!important;
     }
 }
 
 .input--pesquisa-container-hamburguer {
     display: none!important;
+}
+
+.input--pesquisa-container.mobile{
+    margin-bottom: 10px;
+    margin-left: 0;
 }
 
 @media screen and (max-width: 767px) {

@@ -41,25 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
         colunasPadrao[2].id = 'coluna-lista-padrao-3';
     }
 
-    new ListaTarefas('');  // Lista principal (mantém IDs originais para compatibilidade)
+    new ListaTarefas('');  // Lista principal
     new ListaTarefas('2');
     new ListaTarefas('3');
 
-    // Configurar pesquisa global **** funcionando em partes
-    const inputPesquisa = document.getElementById("Input__pesquisa");
-    if (inputPesquisa) {
-        inputPesquisa.addEventListener('input', () => {
-            todasAsListas.forEach(lista => lista.atualizarListaTarefas());
-            console.log("todas as listas >>", todasAsListas);
+    // Configurar pesquisa global para ambos os inputs (desktop e mobile)
+    const inputsPesquisa = document.querySelectorAll('#Input__pesquisa, #Input__pesquisa_mobile');
+    
+    inputsPesquisa.forEach(input => {
+        input.addEventListener('input', (event) => {
+            const termo = event.target.value.toLowerCase();
+            todasAsListas.forEach(lista => lista.atualizarListaTarefas(termo)); // Passa o termo aqui
         });
-    }
+    });
 
     // Carregar listas personalizadas do localStorage
     const listasPersonalizadas = carregarListas();
     listasPersonalizadas.forEach(lista => {
         criarListaNoDom(lista.id, lista.nome);
-        
-        // Inicializar a lista após o DOM ser atualizado
         window.requestAnimationFrame(() => {
             const novaLista = new ListaTarefas(lista.id);
         });
